@@ -40,3 +40,13 @@
 .product-container {
   width: 360px !important;
 }
+
+.sort-order span {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sort-order span.active{
+  font-weight: normal;
+}
+
