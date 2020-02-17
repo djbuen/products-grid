@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import classnames from "classnames";
 import {
-    Button,
     Col,
     Container,
     Dropdown,
@@ -39,7 +38,7 @@ const Sort = () => {
 
   const clear = useCallback(() => {
     setActiveItem({ text: 'Sort', value: null });
-  }, [selectedItem]);
+  }, []);
 
   return (
     <Container className="mt-5 mb-2">
