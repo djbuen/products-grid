@@ -9,6 +9,8 @@ import {
   Col 
 } from 'shards-react';
 
+import { timeSince } from './helper/date';
+
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
@@ -38,7 +40,7 @@ const ProductList = () => {
                 </CardTitle>
                 <p>${product.price}.00</p>
               </CardBody>
-              <CardFooter style={{fontSize: '10px'}}>{product.date}</CardFooter>
+              <CardFooter style={{fontSize: '10px'}}>{timeSince(new Date(product.date))}</CardFooter>
             </Card>
           </Col>
         </Row>
