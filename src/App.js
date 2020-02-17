@@ -1,21 +1,15 @@
 import React from 'react';
-import './App.css';
-import ProductList from './ProductList';
-import Sort from './Sort';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css'
+import './App.css';
+import ProductContainer from './container/product';
 
 function App() {
   return (
     <div className="App">
       <header>
       </header>
-      <div className="row">
-        <Sort />
-      </div>
-      <div className="row">
-        <ProductList/>
-      </div>
+      <ProductContainer />
     </div>
   );
 }

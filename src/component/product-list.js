@@ -9,16 +9,15 @@ import {
   Col 
 } from 'shards-react';
 
-import { timeSince } from './helper/date';
+import { timeSince } from '../helper/date';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-
     async function fetchProducts() {
       try {
-        const response = await fetch('http://localhost:3002/products');
+        const response = await fetch('http://localhost:3002/products?_sort=size&_order=desc');
         const products = await response.json();
         setProducts(products)
       }catch(error){
