@@ -1,13 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Card,
-  CardTitle,
-  CardBody,
-  CardFooter,
-  Container, 
-  Row, 
-  Col 
-} from 'shards-react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import Sort from '../component/sort';
 import ProductList from '../component/product-list';
@@ -28,13 +19,22 @@ const ProductContainer = () => {
     fetchProducts();
   }, []);
 
+  const setFilter = useCallback(async (state) => {
+    try {
+      const response = await fetch(`http://localhost:3002/products?_sort=${state.item}&_order=${state.order}`);
+      const products = await response.json();
+      setProducts(products)
+    }catch(error){
+    }
+  }, []);
+
   return (
     <>
       <div className="row">
-        <Sort />
+        <Sort setFilter={setFilter}/>
       </div>
       <div className="row">
-        <ProductList/>
+        <ProductList products={products}/>
       </div>
     </>
   );

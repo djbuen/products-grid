@@ -10,35 +10,39 @@ import {
     Row
 } from "shards-react";
 
-const Sort = () => {
+const Sort = ({setFilter}) => {
   const [open, setOpen] = useState(false);
-  const [selectedItem, setActiveItem] = useState({ text: 'Sort', value: null });
+  const [item, setActiveItem] = useState({ text: 'Sort', value: null });
   const [order, setOrder] = useState(null);
   const items = [
-    { 
+    {
       text: 'Size',
       value: 'size',
     },
-    { 
+    {
       text: 'Price',
       value: 'price',
     },
-    { 
+    {
       text: 'Date',
       value: 'date',
     }
   ];
 
-  useEffect(() => {
+  const clear = useCallback(() => {
+    setActiveItem({ text: 'Sort', value: null });
   }, []);
+
+  useEffect(() => {
+    setFilter({
+      item: item.value,
+      order
+    });
+  }, [item, order]);
 
   const toggle = useCallback(() => {
     setOpen(!open);
   }, [open]);
-
-  const clear = useCallback(() => {
-    setActiveItem({ text: 'Sort', value: null });
-  }, []);
 
   return (
     <Container className="mt-5 mb-2">
@@ -46,11 +50,12 @@ const Sort = () => {
         <Col md="6"></Col>
         <Col>
           <Dropdown open={open} toggle={toggle} className="d-table">
-            <DropdownToggle>{selectedItem.text}</DropdownToggle>
+            <DropdownToggle>{item.text}</DropdownToggle>
             <DropdownMenu>
               {
-                items.map((item) => (
-                  <DropdownItem 
+                items.map((item, key) => (
+                  <DropdownItem
+                    key={key}
                     onClick={() => setActiveItem({...item})}>
                     {item.text}
                   </DropdownItem>
@@ -65,21 +70,21 @@ const Sort = () => {
         <Col md="1">
           <span className={
               classnames({
-                active: 'asc' === order
+                active: 'ASC' === order
               })
             }
-            onClick={()=>setOrder('asc')}>
+            onClick={()=>setOrder('ASC')}>
             asc
           </span>|
             <span className={
                 classnames({
-                  active: 'desc' === order
+                  active: 'DESC' === order
                 })
               }
-              onClick={()=>setOrder('desc')}>
+              onClick={()=>setOrder('DESC')}>
             desc
           </span>|
-            <span 
+            <span
               onClick={()=>{
                 setOrder(null)
                 clear()
