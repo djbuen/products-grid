@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 
 import useEventListener from '../component/use-event-listener';
 import Sort from '../component/sort';
+import Loading from '../component/loading';
 import ProductList from '../component/product-list';
 
 const ProductContainer = () => {
@@ -63,6 +64,7 @@ const ProductContainer = () => {
       <div className="row">
         <ProductList products={products}/>
       </div>
+      <Loading show={loading}/>
     </>
   );
 }
