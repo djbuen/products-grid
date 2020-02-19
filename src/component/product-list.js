@@ -14,8 +14,8 @@ import { timeSince } from '../helper/date';
 const ProductList = ({products}) => {
   return (
     <Container className="product-container">
-      {products.map(product => (
-        <Row className="mb-2" key={product.id}>
+      {products.map((product, key) => (
+        <Row className="mb-2" key={key}>
           <Col>
             <Card style={{ maxWidth: "300px" }}>
               <CardBody>

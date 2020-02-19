@@ -7,48 +7,38 @@ import ProductList from '../component/product-list';
 
 const ProductContainer = () => {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [state, setState] = useState({
+    item: null,
+    order: null,
+    page: 1
+  });
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch(`http://localhost:3002/products?_sort=size&_order=desc&_page=${page}&_limit=10`);
-        const products = await response.json();
-        setProducts(products)
+        getProducts();
       }catch(error){
       }
     }
-
     fetchProducts();
   }, []);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       if(!loading){
-        setPage(page+1);
+        setState({
+          ...state,
+          page: state.page+1
+        });
       }
     }
-  };
+  });
   useEventListener("scroll", handleScroll);
-
-  useEffect(() => {
-    setLoading(true);
-    getProducts();
-  }, [page]);
-
-  const setFilter = useCallback(async (state) => {
-    try {
-      const response = await fetch(`http://localhost:3002/products?_sort=${state.item}&_order=${state.order}&_page=10&_limit=10`);
-      const products = await response.json();
-      setProducts(products)
-    }catch(error){
-    }
-  }, []);
 
   const getProducts = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:3002/products?_page=${page}&_limit=10`);
+      const response = await fetch(`http://localhost:3002/products?_sort=${state.item}&_order=${state.order}&_page=${state.page}&_limit=10`);
       const _products = await response.json();
       setProducts([...products, ..._products]);
       setLoading(false);
@@ -56,14 +46,20 @@ const ProductContainer = () => {
     }
   });
 
+  useEffect(() => {
+    setLoading(true);
+    getProducts();
+  }, [state]);
+
+  const _setFilter = useCallback(async (_state) => {
+    setProducts([]);
+    setState({ ..._state, page: 1 });
+  });
+
   return (
     <>
-      <div className="row">
-        <Sort setFilter={setFilter}/>
-      </div>
-      <div className="row">
-        <ProductList products={products}/>
-      </div>
+      <Sort setFilter={_setFilter}/>
+      <ProductList products={products}/>
       <Loading show={loading}/>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 // Hook
 const useEventListener = (eventName, handler, element = window) => {
   // Create a ref that stores handler

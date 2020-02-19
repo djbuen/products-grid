@@ -6,17 +6,15 @@ import {
   Col 
 } from 'shards-react';
 
+import './loading.css';
+
 const Loading = ({show}) => {
   return (
     <Container>
       <Row>
         <Col>
           { 
-            show 
-              &&   
-            <>
-              <i class="fa-3x fas fa-spinner fa-pulse"></i>
-            </>
+            show && <h3 className="loading">loading...</h3>
           }
         </Col>
       </Row>
