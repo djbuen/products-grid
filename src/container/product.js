@@ -4,6 +4,8 @@ import useEventListener from '../component/use-event-listener';
 import Sort from '../component/sort';
 import Loading from '../component/loading';
 import ProductList from '../component/product-list';
+import Ad from '../component/ad';
+import End from '../component/end';
 
 import './product.css';
 
@@ -72,11 +74,11 @@ const ProductContainer = () => {
       <Sort setFilter={_setFilter}/>
       <ProductList
         products={products}
-        renderAds={(key)=>(<img key={key} className="ad" src={`http://localhost:3002/ads/?r=${key}`}/>)}
+        renderAds={(id)=>(<Ad id={id} />)}
         renderEnd={() => {
             let _return=<></>;
             if(end){
-              _return = (<h5>~end of catalogue~</h5>)
+              _return = (<End />)
             }
             return _return;
           }
