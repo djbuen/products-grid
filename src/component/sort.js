@@ -10,6 +10,8 @@ import {
     Row
 } from "shards-react";
 
+import './sort.css';
+
 const Sort = ({setFilter}) => {
   const [open, setOpen] = useState(false);
   const [item, setActiveItem] = useState({ text: 'Sort', value: null });
