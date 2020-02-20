@@ -40,7 +40,7 @@ const Sort = ({setFilter}) => {
       item: item.value,
       order
     });
-  }, [item, order]);
+  }, [item, order, setFilter]);
 
   const toggle = useCallback(() => {
     setOpen(!open);

@@ -45,7 +45,7 @@ const ProductContainer = () => {
         });
       }
     }
-  });
+  }, [loading, end, state]);
   useEventListener("scroll", handleScroll);
 
   const getProducts = useCallback(async () => {
@@ -60,14 +60,14 @@ const ProductContainer = () => {
       setLoading(false);
     }catch(error){
     }
-  });
+  }, [products, state]);
 
   //reset to initial state if new filter selected
   const _setFilter = useCallback(async (_state) => {
     setProducts([]);
     setState({ ..._state, page: 1 });
     setEnd(false);
-  });
+  }, [setState]);
 
   return (
     <>
