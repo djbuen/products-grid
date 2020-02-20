@@ -1,0 +1,8 @@
+.sort-order span {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sort-order span.active{
+  font-weight: normal;
+}

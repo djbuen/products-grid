@@ -1,0 +1,16 @@
+.product-container {
+  width: 360px !important;
+}
+
+.card {
+  max-width: 300px;
+}
+
+.face {
+  font-weight: 500;
+}
+
+.date {
+  font-size: 10px;
+}
+

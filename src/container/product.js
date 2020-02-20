@@ -5,6 +5,8 @@ import Sort from '../component/sort';
 import Loading from '../component/loading';
 import ProductList from '../component/product-list';
 
+import './product.css';
+
 const ProductContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
