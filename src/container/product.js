@@ -50,7 +50,7 @@ const ProductContainer = () => {
 
   const getProducts = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:3002/products?_sort=${state.item}&_order=${state.order}&_page=${state.page}&_limit=100`);
+      const response = await fetch(`http://localhost:3002/products?_sort=${state.item}&_order=${state.order}&_page=${state.page}&_limit=10`);
       const _products = await response.json();
       if(_products.length === 0){
         setEnd(true);
